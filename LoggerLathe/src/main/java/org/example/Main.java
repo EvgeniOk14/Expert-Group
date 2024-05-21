@@ -2,20 +2,9 @@ package org.example;
 
 import org.example.models.ConfigManager;
 import org.example.service.FileCreator;
-import org.example.service.LoggerService;
 
 public class Main {
     public static void main(String[] args) {
-//          String receivedString = "exampleString";
-//          LoggerService loggerService = new LoggerService();
-//          loggerService.createFile(receivedString);
-
-
-        // использования метода c заданием пути сохранинея файла
-
-//        String directory = "C:\\example\\directory"; // Укажите путь к директории
-//        LoggerService.createFileWithGivenDirectory(receivedString, directory);
-
 
         // Создание объекта ConfigManager
         ConfigManager configManager = new ConfigManager();
