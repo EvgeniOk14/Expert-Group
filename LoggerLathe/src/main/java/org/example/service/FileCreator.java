@@ -50,7 +50,9 @@ public class FileCreator
             writer.newLine(); // Переход на новую строку
             writer.write(content); // запись содержимого в файл
             System.out.println("Файл успешно создан: " + fileName); // вывод в терминал, для проверки
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             System.err.println("Произошла ошибка при создании файла: " + e.getMessage());
         }
     }

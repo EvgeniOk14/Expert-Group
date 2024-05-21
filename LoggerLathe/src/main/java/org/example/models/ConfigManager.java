@@ -8,7 +8,7 @@ import java.util.Properties;
 public class ConfigManager
 {
 
-
+    //region Fields
     private static final String CONFIG_FILE = "D:/Expert Group/LoggerLathe/src/main/java/org/example/config/config.properties"; // Определение константы, которая содержит имя конфигурационного файла
 
     private Properties properties;  // Properties в Java — это класс, который является частью стандартной библиотеки
@@ -17,13 +17,15 @@ public class ConfigManager
                                  // и используется для сохранения пар ключ-значение,
                                 // где и ключи, и значения являются строками.
                                // Этот класс широко используется для хранения конфигурационных параметров
-                              // и для загрузки этих параметров из файлов свойств (properties files).
-
+                              // и для загрузки этих параметров из файлов свойств (properties files)
+    //endregion
+    //region Constructor
     public ConfigManager() //  Конструктор класса
     {
         properties = new Properties(); // Инициализация объекта Properties.
         loadProperties(); //  Вызов метода loadProperties, который загружает конфигурационные параметры из файла.
     }
+    //endregion
 
     /** метод загружает свойства из файла **/
     private void loadProperties()

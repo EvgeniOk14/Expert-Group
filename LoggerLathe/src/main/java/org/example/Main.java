@@ -3,8 +3,10 @@ package org.example;
 import org.example.models.ConfigManager;
 import org.example.service.FileCreator;
 
-public class Main {
-    public static void main(String[] args) {
+public class Main
+{
+    public static void main(String[] args)
+    {
 
         // Создание объекта ConfigManager
         ConfigManager configManager = new ConfigManager();
