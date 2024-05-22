@@ -25,37 +25,32 @@ public class MachineLogger
     /** метод начала работы с платой **/
     public void startNewPlate(String plateSerialNumber) //  передаём параметр - серийный номер платы
     {
-        LocalDateTime now = LocalDateTime.now(); // получаем текущую дату и время
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"); // создаём объект LocalDateTime с конкретной датой и временем
-
-        String timestamp = now.format(formatter); // форматируем эти данные в строку
-
-        currentFileName = timestamp + "_" + plateSerialNumber + ".txt"; // Создает имя файла, включающее временную метку и серийный номер платы
-        log("Плата установлена: " + plateSerialNumber + " Время: " + timestamp); // Логирует сообщение о том, что плата установлена, вызывая метод log
+        currentFileName = timeFormatter() + "_" + plateSerialNumber + ".txt"; // Создает имя файла, включающее временную метку и серийный номер платы
+        log("Установлена плата серийный номер №: " + plateSerialNumber + " Время установки: " + timeFormatter()); // Логирует сообщение о том, что плата установлена, вызывая метод log
     }
 
     /** метод логирует сообщение о штатной работе **/
     public void logNormalOperation(String message)
     {
-        log("INFO: " + message);
+        log("INFO: " + message + " Время: " +  timeFormatter());
     }
 
     /** метод логирует предупреждающие сообщения **/
     public void logWarning(String message)
     {
-        log("WARNING: " + message);
+        log("WARNING: " + message + " Время сообщения об предупреждении: " + timeFormatter());
     }
 
     /** метод логирует сообщения об ошибках **/
     public void logError(String message)
     {
-        log("ERROR: " + message);
+        log("ERROR: " + message + " Время сообщения об предупреждении: " + timeFormatter());
     }
 
     /** метод логирует сообщение о завершении работы с платой **/
     public void endPlateOperation()
     {
-        log("Операция завершена");
+        log("Операция по работе с платой завершена!" + " Время завершения операции с платой: " + timeFormatter());
         currentFileName = null; // сбрасываем значение currentFileName на null, чтобы указать, что работа с текущей платой завершена
     }
 
@@ -70,5 +65,14 @@ public class MachineLogger
         {
             System.err.println("Не установлена текущая плата для логирования"); // выводит сообщение об ошибке в консоль
         }
+    }
+
+    /** метод получения текущей даты и времени и перевод их в строку **/
+    public String timeFormatter()
+    {
+        LocalDateTime now = LocalDateTime.now(); // получаем текущую дату и время
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"); // создаём объект LocalDateTime с конкретной датой и временем
+        String timestamp = now.format(formatter); // форматируем эти данные в строку
+        return timestamp;
     }
 }

@@ -33,12 +33,16 @@ public class FileCreator
 
             String filePath = defaultPath + File.separator + fileName;
 
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) { // Открытие файла в режиме добавления (append)
-                writer.write(content);
-                writer.newLine();
-                System.out.println("Файл успешно обновлен: " + filePath);
-            } catch (IOException e) {
-                System.err.println("Произошла ошибка при обновлении файла: " + e.getMessage());
+            // Открытие файла в режиме добавления (append)
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true)))
+            {
+                writer.write(content); // запись содержимого
+                writer.newLine(); // переход на новую строку
+                System.out.println("Файл успешно обновлен: " + filePath); // вывод в терминал об успешной работе
+            }
+            catch (IOException e)
+            {
+                System.err.println("Произошла ошибка при обновлении файла: " + e.getMessage()); // вывод в терминал об ошибке
             }
         }
     }
