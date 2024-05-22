@@ -5,9 +5,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
+/** Класс создание файла **/
 public class FileCreator
 {
     //region Fields
@@ -22,38 +21,27 @@ public class FileCreator
     //endregion
 
     /** метод создания файла с заданным содержимым **/
-    public void createFile(String content)
-    {
-
-        LocalDateTime now = LocalDateTime.now(); // Получаем текущую дату и время
-
-        // Форматируем дату и время в строку
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"); // Создает объект DateTimeFormatter
-                                                                                         // для форматирования даты и времени
-                                                                                        // в строку определенного формата
-                                                                                       // (yyyy_MM_dd_HH_mm_ss).
-        String timestamp = now.format(formatter); // Форматирует текущую дату и время в строку timestamp.
-
-        String defaultPath = configManager.getDefaultPath();  // получаем дефолтный путь из конфигурации
-
-        File directory = new File(defaultPath); // Создает объект File, представляющий директорию по этому пути
-
-        if (!directory.exists()) // Проверяет, существует ли директория
+        public void createFile(String fileName, String content)
         {
-            directory.mkdirs();// если нет, создает все необходимые поддиректории
-        }
+            String defaultPath = configManager.getDefaultPath();
+            File directory = new File(defaultPath);
 
-        String fileName = defaultPath + File.separator + timestamp + "_" + content + ".txt";  // Создаем имя файла
+            if (!directory.exists())
+            {
+                directory.mkdirs();
+            }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) { // Записываем строку в файл
-            writer.write("Дата и время создания файла: " + timestamp);
-            writer.newLine(); // Переход на новую строку
-            writer.write(content); // запись содержимого в файл
-            System.out.println("Файл успешно создан: " + fileName); // вывод в терминал, для проверки
-        }
-        catch (IOException e)
-        {
-            System.err.println("Произошла ошибка при создании файла: " + e.getMessage());
+            String filePath = defaultPath + File.separator + fileName;
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) { // Открытие файла в режиме добавления (append)
+                writer.write(content);
+                writer.newLine();
+                System.out.println("Файл успешно обновлен: " + filePath);
+            } catch (IOException e) {
+                System.err.println("Произошла ошибка при обновлении файла: " + e.getMessage());
+            }
         }
     }
-}
+
+
+

@@ -5,26 +5,29 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/** Класс управление конфигурацией **/
 public class ConfigManager
 {
-
     //region Fields
-    private static final String CONFIG_FILE = "D:/Expert Group/LoggerLathe/src/main/java/org/example/config/config.properties"; // Определение константы, которая содержит имя конфигурационного файла
 
-    private Properties properties;  // Properties в Java — это класс, который является частью стандартной библиотеки
-                                   // Java (java.util.Properties)
-                                  // Он представляет собой подкласс Hashtable
-                                 // и используется для сохранения пар ключ-значение,
-                                // где и ключи, и значения являются строками.
-                               // Этот класс широко используется для хранения конфигурационных параметров
-                              // и для загрузки этих параметров из файлов свойств (properties files)
+    // Определение константы, которая содержит имя конфигурационного файла
+    private static final String CONFIG_FILE = "D:/Expert Group/LoggerLathe/src/main/java/org/example/config/config.properties";
+
+    // Properties в Java — это класс, который является частью стандартной библиотеки Java (java.util.Properties)
+    private Properties properties; // Он представляет собой подкласс Hashtable и используется для сохранения пар ключ-значение
+                                   // где и ключи, и значения являются строками.
+                                   // Этот класс широко используется для хранения конфигурационных параметров
+                                   // и для загрузки этих параметров из файлов свойств (properties files)
     //endregion
+
     //region Constructor
+
     public ConfigManager() //  Конструктор класса
     {
         properties = new Properties(); // Инициализация объекта Properties.
         loadProperties(); //  Вызов метода loadProperties, который загружает конфигурационные параметры из файла.
     }
+
     //endregion
 
     /** метод загружает свойства из файла **/
@@ -44,8 +47,8 @@ public class ConfigManager
     public String getDefaultPath()
     {
         return properties.getProperty("default.path", "./"); // Возвращение значения свойства default.path
-                                                                          // Если свойство не найдено,
-                                                                         // возвращается значение по умолчанию ("./").
+                                                                           // Если свойство не найдено,
+                                                                           // возвращается значение по умолчанию ("./").
     }
 
     /** метод  задает значение свойства default.path  **/

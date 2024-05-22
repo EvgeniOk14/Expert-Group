@@ -1,29 +1,31 @@
 package org.example;
 
 import org.example.models.ConfigManager;
+import org.example.models.MachineLogger;
 import org.example.service.FileCreator;
 
 public class Main
 {
     public static void main(String[] args)
     {
-
-        // Создание объекта ConfigManager
         ConfigManager configManager = new ConfigManager();
-
-        // Создание объекта FileCreator
         FileCreator fileCreator = new FileCreator(configManager);
+        MachineLogger logger = new MachineLogger(fileCreator);
 
+        // Пример использования
+        logger.startNewPlate("12345ABC");
+        logger.logNormalOperation("Компонент установлен");
+        logger.logWarning("Температура превышена");
+        logger.logError("Ошибка в работе датчика");
+        logger.endPlateOperation();
 
-        // Создание первого файла с использованием дефолтного пути
-        fileCreator.createFile("Пример содержимого файла 1");
-
-
-        // Установка нового пути для сохранения файлов
+        // Изменение пути сохранения файлов
         configManager.setDefaultPath("new/path/to/save/files");
 
-        // Создание второго файла с использованием нового пути
-        fileCreator.createFile("Пример содержимого файла 2");
-
+        // Вставка новой платы
+        logger.startNewPlate("67890DEF");
+        logger.logNormalOperation("Компонент установлен");
+        logger.logWarning("Низкое давление");
+        logger.endPlateOperation();
     }
 }
