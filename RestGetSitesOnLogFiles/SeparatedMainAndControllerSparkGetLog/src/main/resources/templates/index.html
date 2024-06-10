@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Получение логов и вывод ссылок на файлы</title>
+    </head>
+
+    <body>
+        <header>Вывод всех ссылок на  файлы в которых содержатся логи:</header>
+        <ul>
+            <th:block th:each="logFile : ${logFiles}">
+
+                <th:block th:with="fileUrl=${baseURL} + '/log/' + ${logFile}">
+
+                    <li>
+                        <a th:href="${fileUrl}" th:text="${logFile}"></a>
+                    </li>
+
+                </th:block>
+
+            </th:block>
+        </ul>
+    </body>
+</html>
+
+

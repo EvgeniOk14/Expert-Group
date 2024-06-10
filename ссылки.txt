@@ -1,0 +1,6 @@
+https://chatgpt.com/c/97764282-4ce3-47d7-8f57-c61bfa47fb91
+
+https://google.github.io/gson/
+
+
+http://localhost:8095/getlog

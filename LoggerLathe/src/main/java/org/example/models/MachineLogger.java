@@ -2,17 +2,15 @@ package org.example.models;
 
 import org.example.service.FileCreator; // импорт класса FileCreator
 import java.time.LocalDateTime; // библиотека представляет дату и время без часового пояса
-import java.time.format.DateTimeFormatter; // библиотека для форматирования и парсинга объектов даты и времени,
-                                          // позволяет преобразовывать объекты даты и времени в строковые представления
-                                         // и обратно.
+import java.time.format.DateTimeFormatter; // библиотека для форматирования объектов даты и времени в строку
+
 
 /** Класс для логирования работы станка **/
 public class MachineLogger
 {
     //region Fields
-    private FileCreator fileCreator; // отвечает за создание и запись файлов.
-    private String currentFileName; // Строка, которая хранит имя текущего файла для логирования.
-                                   // Имя файла включает временную метку и серийный номер платы.
+    private FileCreator fileCreator; // класс создаёт и записывает файлы
+    private String currentFileName; //  имя текущего файла
     //endregion
 
     //region Constructor
@@ -25,7 +23,7 @@ public class MachineLogger
     /** метод начала работы с платой **/
     public void startNewPlate(String plateSerialNumber) //  передаём параметр - серийный номер платы
     {
-        currentFileName = timeFormatter() + "_" + plateSerialNumber + ".txt"; // Создает имя файла, включающее временную метку и серийный номер платы
+        currentFileName = "psblog" + "_" + timeFormatterForNameOfFile() + "_" + plateSerialNumber + ".txt"; // Создает имя файла, включающее временную метку и серийный номер платы
         log("Установлена плата серийный номер №: " + plateSerialNumber + " Время установки: " + timeFormatter()); // Логирует сообщение о том, что плата установлена, вызывая метод log
     }
 
@@ -70,9 +68,15 @@ public class MachineLogger
     /** метод получения текущей даты и времени и перевод их в строку **/
     public String timeFormatter()
     {
-        LocalDateTime now = LocalDateTime.now(); // получаем текущую дату и время
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"); // создаём объект LocalDateTime с конкретной датой и временем
-        String timestamp = now.format(formatter); // форматируем эти данные в строку
-        return timestamp;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
+        //System.out.println(formatter.format(LocalDateTime.now()));
+        return formatter.format(LocalDateTime.now());
+    }
+    /**  метод формирует имя файла из даты и времени по заданному шаблону в троку **/
+    public String timeFormatterForNameOfFile()
+    {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH;mm;ss.SSS");
+        //System.out.println(formatter.format(LocalDateTime.now()));
+        return formatter.format(LocalDateTime.now());
     }
 }

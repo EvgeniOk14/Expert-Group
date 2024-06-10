@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Получение логов и вывод ссылок на файлы</title>
+    </head>
+    <body>
+        <header>Вывод всех ссылок на логи:</header>
+        <ul>
+            <li th:each="logFile : ${logFiles}">
+                <a th:href="'/log/' + ${logFile}" th:text="${logFile}"></a>
+            </li>
+        </ul>
+    </body>
+</html>
+
+
+
+
+
+
+<!--<body>-->
+<!--<header>Вывод всех ссылок на логи:</header>-->
+<!--<ul> &lt;!&ndash; создание не нумерованного списка &ndash;&gt;-->
+<!--    <th:block th:each="logFile : ${logFiles}"> &lt;!&ndash; тег th:block для группировки элементов и итерация по логам &ndash;&gt;-->
+<!--        <li> &lt;!&ndash; для каждого элемента списка &ndash;&gt;-->
+<!--            <a th:href="@{/log/{filename}(filename=${logFile})}" th:text="${logFile}"></a>-->
+<!--            &lt;!&ndash;формирование ссылки, по которой осуществляется переход по заданному пути в метод контоллера viewLogFile  &ndash;&gt;-->
+<!--        </li>-->
+<!--    </th:block>-->
+<!--</ul>-->
+<!--</body>-->
