@@ -11,8 +11,6 @@ public class MethodRegistry
     private static final Map<String, InterfaceMethods> methodMap = new HashMap<>();
     static // автоматическое заполнение Map ключами и значениями при инициализации класса
     {
-//        methodMap.put("log:update",  new LogEntity());
-//        methodMap.put("file:get", new FileEntity());
         methodMap.put("log",  new LogEntity());
         methodMap.put("file", new FileEntity());
         // а так же можно добавить другие методы и сущности, если это необходимо

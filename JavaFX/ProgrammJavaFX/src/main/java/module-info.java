@@ -17,6 +17,8 @@ module org.example.programmjavafx {
     requires org.eclipse.jetty.websocket.server;
     requires org.eclipse.jetty.server;
     requires org.eclipse.jetty.websocket.servlet;
+    requires thymeleaf;
+    requires slf4j.api;
 
     opens org.example.programmjavafx to javafx.fxml;
     exports org.example.programmjavafx;

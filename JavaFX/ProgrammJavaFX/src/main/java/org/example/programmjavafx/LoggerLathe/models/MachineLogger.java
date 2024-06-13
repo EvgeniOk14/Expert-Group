@@ -22,7 +22,7 @@ public class MachineLogger
     /** метод начала работы с платой **/
     public void startNewPlate(String plateSerialNumber) //  передаём параметр - серийный номер платы
     {
-        currentFileName = "psblog" + "_" + timeFormatterForNameOfFile() + "_" + plateSerialNumber + ".txt"; // Создает имя файла, включающее временную метку и серийный номер платы
+        currentFileName = "pcblog" + "_" + timeFormatterForNameOfFile() + "_" + plateSerialNumber + ".txt"; // Создает имя файла, включающее временную метку и серийный номер платы
         log("Установлена плата серийный номер №: " + plateSerialNumber + " Время установки: " + timeFormatter()); // Логирует сообщение о том, что плата установлена, вызывая метод log
     }
 

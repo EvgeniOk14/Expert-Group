@@ -6,15 +6,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.example.programmjavafx.Server.CRUDController;
 import org.example.programmjavafx.Server.WebSocketServer;
-import java.util.Date;
+import java.io.IOException;
 
-/**
- * запускающий класс приложения
- **/
+/** запускающий класс приложения **/
 public class HelloApplication extends Application
 {
     //region Fields
-    long currentTime = System.currentTimeMillis();
     private WebSocketServer webSocketServer;
     //endregion
 
@@ -25,8 +22,6 @@ public class HelloApplication extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        System.out.println("Метод start() вызван в: " + new Date(System.currentTimeMillis()));
-
         // Создаем загрузчик FXML файла с заданным путем к ресурсу
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/programmjavafx/newfile.fxml"));
 
@@ -45,41 +40,40 @@ public class HelloApplication extends Application
         // Получаем экземпляр WebSocketServer из контроллера и сохраняем его в поле
         webSocketServer = controller.getWebSocketServer();
 
-        // Запускаем сервер
-        startServer(controller); // передаём аргумент controller (типа LatheController) в метод startServer
+        startServer(); // Запускаем сервер
     }
+
+
 
     /** метод останавливает приложение (освобождение ресурсов или закрытие соединений) **/
     @Override
     public void stop() throws Exception
     {
-        System.out.println("Метод stop() вызван в: " + new Date(System.currentTimeMillis()));
-
-        // Если WebSocketServer был инициализирован, останавливаем его
         if (webSocketServer != null)
         {
             webSocketServer.stop();
         }
     }
 
-    /**
-     * Метод для запуска сервера
-     */
-    private void startServer(LatheController controller)
+    /** Метод для запуска сервера **/
+    private void startServer()
     {
-        System.out.println("Метод startServer() вызван в: " + new Date(System.currentTimeMillis()));
         new Thread(() ->
         {
-            // передача параметра controller (тип LatheController) в CRUDController
-            CRUDController.setLatheController(controller);
-
             // запуска метода main класса CRUDController в новом потоке (инициализации веб-сервера)
-            CRUDController.main(new String[0]);
+            try {
+                CRUDController.main(new String[0]);
+                System.out.println("Запустился сервер на порту 809");
+            }
+            catch (IOException e)
+            {
+                throw new RuntimeException(e);
+            }
             // new String[0] создает пустой массив строк, имитируя отсутствие аргументов командной строки
-
         }
         ).start();
     }
+
 
     /**
      * Основной метод запуска приложения
@@ -88,8 +82,6 @@ public class HelloApplication extends Application
      **/
     public static void main(String[] args)
     {
-        System.out.println("Метод main в классе HelloApplication вызван в: " + new Date(System.currentTimeMillis()));
-
         launch(args); // запуск JavaFX приложения
     }
 }

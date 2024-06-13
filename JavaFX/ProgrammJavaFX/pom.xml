@@ -116,11 +116,20 @@
       <artifactId>spark-core</artifactId>
       <version>2.9.3</version>
     </dependency>
+
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <version>1.7.25</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+
+
 
     <dependency>
       <groupId>org.thymeleaf</groupId>
@@ -161,6 +170,11 @@
   </dependencies>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources/</directory>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -169,7 +183,10 @@
         <configuration>
           <source>21</source>
           <target>21</target>
-            <compilerArgs>--enable-preview</compilerArgs>
+<!--            <compilerArgs>&#45;&#45;enable-preview</compilerArgs>-->
+          <compilerArgs>
+            <arg>--enable-preview</arg>
+          </compilerArgs>
         </configuration>
       </plugin>
       <plugin>

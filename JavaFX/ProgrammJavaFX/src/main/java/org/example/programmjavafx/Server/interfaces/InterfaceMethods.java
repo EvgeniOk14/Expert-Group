@@ -32,15 +32,16 @@ public interface InterfaceMethods
 
         }
     }
+
     void get(Args args) throws Exception; // используемый метод
 
-    void save(Args args); // метод который возможно использовать
+    void save(Args args) throws Exception; // метод который возможно использовать
 
-    void delete(Args args); // метод который возможно использовать
+    void delete(Args args) throws Exception; // метод который возможно использовать
 
-    void create(Args args); // метод который возможно использовать
+    void create(Args args) throws Exception; // метод который возможно использовать
 
-    void update(Args args);
+    void update(Args args) throws Exception;
 }
 
 //    void get(Session session, String data) throws Exception; // используемый метод

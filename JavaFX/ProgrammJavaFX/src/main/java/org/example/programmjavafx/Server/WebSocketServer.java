@@ -3,33 +3,34 @@ package org.example.programmjavafx.Server;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.websocket.server.WebSocketHandler;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
-import org.example.programmjavafx.LatheController;
 
+/**
+ * обрабатывает websocket  соединения и сообщения
+ * **/
 public class WebSocketServer
 {
-    private Server server;
-
-    private LatheController latheController; // добавил конструктор
-
-    public WebSocketServer(LatheController latheController)
-    {
-        this.latheController = latheController;
-    }
+    private Server server; // Jetty - легковесный HTTP-сервер обрабатывать входящие HTTP и WebSocket соединения
 
     public void start() throws Exception
     {
         server = new Server(8095);
+
+        // WebSocketHandler обработчик, который управляет WebSocket-соединениями
+        // используется анонимный класс, который наследует WebSocketHandler
+        // и переопределяет метод configure
         WebSocketHandler wsHandler = new WebSocketHandler()
         {
+            // используется для настройки фабрики сервлетов WebSocket (WebSocketServletFactory).
             @Override
             public void configure(WebSocketServletFactory factory)
             {
+                // зарегистрировать класс MyWebSocketHandler в качестве обработчика WebSocket-сообщений.
                 factory.register(MyWebSocketHandler.class);
             }
         };
         server.setHandler(wsHandler);
         server.start();
-        System.out.println("Server started on port 8095");
+        System.out.println("Сервер для общения с клиентами стартовал на порту: 8095");
     }
 
     public void stop() throws Exception
@@ -40,4 +41,3 @@ public class WebSocketServer
         }
     }
 }
-

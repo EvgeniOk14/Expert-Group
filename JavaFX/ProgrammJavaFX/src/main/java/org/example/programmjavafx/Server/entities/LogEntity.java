@@ -8,42 +8,67 @@ import java.io.IOException;
 
 public class LogEntity implements InterfaceMethods
 {
-    private Gson gson = new Gson();
+    private static Gson gson = new Gson();
+    private JsonObject response = new JsonObject();
 
     @Override
     public void get(InterfaceMethods.Args args) throws IOException
     {
-        JsonObject response = new JsonObject();
+        System.out.println("В LogEntity сработал метод get");
 
         MyWebSocketHandler.findLogByBoardNumber(args.session, args.data); // вызов метода нахождения лог-файла
 
-        response.addProperty("status", "success");
+        response.addProperty("ответ", "В LogEntity сработал метод get");
 
-        response.addProperty("data", "Log entity data.");
+        sendMessage(args, response);
 
-        try
-        {
-            args.session.getRemote().sendString(gson.toJson(response)); // отправка соощения клиенту
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void update(InterfaceMethods.Args args)
     {
-        System.out.println("сработал метод update!");
+        System.out.println("В LogEntity сработал метод update!");
 
-        JsonObject response = new JsonObject();
+        response.addProperty("ответ", "В LogEntity cработал метод update");
 
-        response.addProperty("status", "success");
+        sendMessage(args, response);
 
-        response.addProperty("ответ", "Сработал метод update");
+    }
 
+    @Override
+    public void save(InterfaceMethods.Args args)
+    {
+        System.out.println("В LogEntity сработал метод save!");
+
+        response.addProperty("ответ", "В LogEntity сработал метод save");
+
+        sendMessage(args, response);
+    }
+
+    @Override
+    public void delete(InterfaceMethods.Args args)
+    {
+        System.out.println("В LogEntity сработал метод dalete!");
+
+        response.addProperty("ответ", "В LogEntity сработал метод delete");
+
+        sendMessage(args, response);
+    }
+
+    @Override
+    public void create(InterfaceMethods.Args args)
+    {
+        System.out.println("В LogEntity сработал метод create!");
+
+        response.addProperty("ответ", "В LogEntity  сработал метод create");
+
+        sendMessage(args, response);
+    }
+
+    public static void sendMessage(InterfaceMethods.Args args, JsonObject response)
+    {
         try {
-            args.session.getRemote().sendString("сработал метод update!");
+            //args.session.getRemote().sendString("сработал метод update!");
             args.session.getRemote().sendString(gson.toJson(response));
 
         }
@@ -51,25 +76,6 @@ public class LogEntity implements InterfaceMethods
         {
             e.printStackTrace();
         }
-
-    }
-
-    @Override
-    public void save(InterfaceMethods.Args args)
-    {
-        // в случае необходимости метод нужно переопределить
-    }
-
-    @Override
-    public void delete(InterfaceMethods.Args args)
-    {
-        // в случае необходимости метод нужно переопределить
-    }
-
-    @Override
-    public void create(InterfaceMethods.Args args)
-    {
-        // в случае необходимости метод нужно переопределить
     }
 }
 
