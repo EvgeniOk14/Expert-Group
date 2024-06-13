@@ -21,9 +21,9 @@ import java.util.concurrent.ConcurrentHashMap;
 @WebSocket
 public class MyWebSocketHandler
 {
-    private static final String LOG_DIRECTORY = "C:\\Expert Group\\LoggerLathe\\logfiles";
+    //private static final String LOG_DIRECTORY = "C:\\Expert Group\\LoggerLathe\\logfiles";
 
-    //private static final String LOG_DIRECTORY = "C:\\Expert Group\\JavaFX\\ProgrammJavaFX\\";
+      private static final String LOG_DIRECTORY = "C:\\Expert Group\\JavaFX\\ProgrammJavaFX";
 
     private static final Map<Session, String> sessions = new ConcurrentHashMap<>();
 
@@ -152,9 +152,9 @@ public class MyWebSocketHandler
 
     public static void findLogByBoardNumber(Session session, String boardNumber) throws IOException
     {
-        Path logDirPath = Paths.get("C:/Expert Group/LoggerLathe/logfiles"); // Путь к каталогу логов
+        //Path logDirPath = Paths.get("C:/Expert Group/LoggerLathe/logfiles"); // Путь к каталогу логов
 
-        //Path logDirPath = Paths.get("C:\\Expert Group\\JavaFX\\ProgrammJavaFX\\");
+          Path logDirPath = Paths.get("C:/Expert Group/JavaFX/ProgrammJavaFX");
 
         String fileNamePattern = "*_" + boardNumber + ".txt"; // Шаблон имени файла
 
@@ -187,9 +187,9 @@ public class MyWebSocketHandler
     public static void getFile(Session session, String data) throws IOException
     {
 
-        Path logDirPath = Paths.get("C:/Expert Group/LoggerLathe/logfiles"); // Путь к каталогу логов
+        //Path logDirPath = Paths.get("C:/Expert Group/LoggerLathe/logfiles"); // Путь к каталогу логов
 
-        //Path logDirPath = Paths.get("C:\\Expert Group\\JavaFX\\ProgrammJavaFX\\");
+          Path logDirPath = Paths.get("C:/Expert Group/JavaFX/ProgrammJavaFX");
 
         String fileNamePattern = "*_" + data + ".txt"; // Шаблон имени файла
 

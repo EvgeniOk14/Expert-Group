@@ -19,8 +19,8 @@ import static spark.Spark.*;
 public class CRUDController
 {
     //region Fields
-    private static final String LOG_DIRECTORY = "C:\\Expert Group\\LoggerLathe\\logfiles";
-    //private static final String LOG_DIRECTORY = "C:\\Expert Group\\JavaFX\\ProgrammJavaFX\\";
+    //private static final String LOG_DIRECTORY = "C:\\Expert Group\\LoggerLathe\\logfiles";
+      private static final String LOG_DIRECTORY = "C:\\Expert Group\\JavaFX\\ProgrammJavaFX";
 
     //endregion
 
