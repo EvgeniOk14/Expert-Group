@@ -198,29 +198,3 @@ public class CRUDController
     }
 }
 
-
-
-
-
-
-
-//public static List<String> getAllLogFiles()
-//{
-//    List<String> logFiles = new ArrayList<>();
-//    File directory = new File(LOG_DIRECTORY);
-//    if (directory.exists() && directory.isDirectory())
-//    {
-//        File[] files = directory.listFiles();
-//        if (files != null)
-//        {
-//            for (File file : files)
-//            {
-//                if (file.isFile() && file.getName().matches("\\d{4}_\\d{2}_\\d{2}_\\d{2}_\\d{2}_\\d{2}_\\w{8}.txt"))
-//                {
-//                    logFiles.add(file.getName());
-//                }
-//            }
-//        }
-//    }
-//    return logFiles;
-//}

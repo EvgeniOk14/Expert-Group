@@ -6,7 +6,8 @@ public class RequestMessage
     private String entity;
     private String data;
 
-    public RequestMessage(String method, String entity, String data) {
+    public RequestMessage(String method, String entity, String data)
+    {
         this.method = method;
         this.entity = entity;
         this.data = data;
@@ -45,11 +46,13 @@ public class RequestMessage
         this.entity = entity;
     }
 
-    public String getData() {
+    public String getData()
+    {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(String data)
+    {
         this.data = data;
     }
 }

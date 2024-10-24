@@ -14,7 +14,7 @@ public class ConfigManager
     //region Constructor
     public ConfigManager()
     {
-        // defalt constructor
+        // default constructor
     }
     //endregion
 
