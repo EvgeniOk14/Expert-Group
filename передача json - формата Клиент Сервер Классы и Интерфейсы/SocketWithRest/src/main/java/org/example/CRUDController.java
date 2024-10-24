@@ -19,7 +19,7 @@ public class CRUDController
 
     public static void main(String[] args)
     {
-        port(8095); // сервер запущен на порту 8095
+        port(8098); // сервер запущен на порту 8095
 
         webSocket("/ws", MyWebSocketHandler.class); // Маршрут для обработки WebSocket-соединения
 

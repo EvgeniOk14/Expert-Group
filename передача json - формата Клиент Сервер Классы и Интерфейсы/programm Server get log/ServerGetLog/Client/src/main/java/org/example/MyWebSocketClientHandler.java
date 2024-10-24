@@ -21,18 +21,19 @@ public class MyWebSocketClientHandler
     {
         System.out.println("Connected to server: " + session.getRemoteAddress().getAddress());
 
-        RequestMessage requestMessage = new RequestMessage("get", "file", "12345BCA");
-        String jsonMessage = gson.toJson(requestMessage);
+//        RequestMessage requestMessage = new RequestMessage("get", "log", "46SJ78GF");
+//        String jsonMessage = gson.toJson(requestMessage);
 
-//        RequestMessage requestMessage1 = new RequestMessage("update", "log", "12345ABC");
+//        RequestMessage requestMessage1 = new RequestMessage("get", "log", "NVV45FG");
 //        String jsonMessage1 = gson.toJson(requestMessage1);
-
-
-//        RequestMessage requestMessage2 = new RequestMessage("get", "test", "67890DEF");
+//
+//
+//        RequestMessage requestMessage2 = new RequestMessage("get", "log", "584FDG8");
 //        String jsonMessage2 = gson.toJson(requestMessage2);
 //
 //
-//        RequestMessage requestMessage3 = new RequestMessage("get", "log");
+//
+//        RequestMessage requestMessage3 = new RequestMessage("get", "log", "RTT464F");
 //        String jsonMessage3 = gson.toJson(requestMessage3);
 //
 //
@@ -47,21 +48,21 @@ public class MyWebSocketClientHandler
 //        RequestMessage requestMessage6 = new RequestMessage("ghjdfh", "fkgj", "456grfd");
 //        String jsonMessage6 = gson.toJson(requestMessage6);
 //
-//        RequestMessage requestMessage7 = new RequestMessage("get", "file", "67890DEF");
-//        String jsonMessage7 = gson.toJson(requestMessage7);
+        RequestMessage requestMessage7 = new RequestMessage("get", "file", "32590RTW");
+        String jsonMessage7 = gson.toJson(requestMessage7);
 
         try
         {
-            session.getRemote().sendString(jsonMessage);
-           // session.getRemote().sendString(jsonMessage1);
-//            session.getRemote().sendString(jsonMessage2);
+           // session.getRemote().sendString(jsonMessage);
+//            session.getRemote().sendString(jsonMessage1);
+ //           session.getRemote().sendString(jsonMessage2);
 //            session.getRemote().sendString(jsonMessage3);
 //
 //            session.getRemote().sendString(jsonMessage4);
 //            session.getRemote().sendString(jsonMessage5);
 //            session.getRemote().sendString(jsonMessage6);
 //
-//            session.getRemote().sendString(jsonMessage7);
+            session.getRemote().sendString(jsonMessage7);
 
         }
         catch (Exception e)

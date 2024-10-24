@@ -2,26 +2,63 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckComboBox?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.programmjavafx.LatheController">
-   <children>
-      <AnchorPane layoutY="112.0" prefHeight="287.0" prefWidth="700.0" style="-fx-background-color: #fafafa;">
-         <children>
-            <Button fx:id="startButton" layoutX="260.0" layoutY="25.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="255.0" text="запуск новой платы" />
-            <Button fx:id="normalWorkButton" layoutX="275.0" layoutY="84.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="212.0" text="log нормальная работа" />
-            <Button fx:id="worningButton" layoutX="227.0" layoutY="152.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="151.0" text="Log Прупреждение" />
-            <Button fx:id="errorButton" layoutX="407.0" layoutY="152.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="151.0" text="Log Ошибки" />
-            <Button fx:id="endButton" layoutX="270.0" layoutY="216.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="223.0" text="Конец операции обработки платы" />
-         </children>
-      </AnchorPane>
-      <Label layoutX="157.0" layoutY="43.0" text="Управление станком" textFill="WHITE">
-         <font>
-            <Font name="Agency FB" size="24.0" />
-         </font>
-      </Label>
-   </children>
+    <children>
+        <Label layoutX="157.0" layoutY="43.0" text="Управление станком" textFill="WHITE">
+            <font>
+                <Font name="Agency FB" size="24.0" />
+            </font>
+        </Label>
+        <AnchorPane fx:id="AnchorPane" layoutX="7.0" layoutY="112.0" prefHeight="287.0" prefWidth="700.0" style="-fx-background-color: #fafafa;">
+            <children>
+                <Button fx:id="startButton" layoutX="175.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="212.0" text="запуск новой платы" />
+                <Button fx:id="normalWorkButton" layoutX="175.0" layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="212.0" text="log нормальная работа" />
+                <Button fx:id="warningButton" layoutX="235.0" layoutY="112.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="151.0" text="Log Прупреждение" />
+                <Button fx:id="errorButton" layoutX="235.0" layoutY="167.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="151.0" text="Log Ошибки" />
+                <Button fx:id="endButton" layoutX="175.0" layoutY="216.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="212.0" text="Конец операции обработки платы" />
+
+                <!-- Новые элементы интерфейса -->
+                <Button fx:id="selectImageButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Выбрать изображение" />
+                <Button fx:id="decodeButton" layoutX="14.0" layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Декодировать" />
+                <TextField fx:id="plateNumberField" layoutX="14.0" layoutY="112.0" prefHeight="40.0" prefWidth="150.0" promptText="Серийный номер платы" />
+                <MenuButton fx:id="menuButton" layoutX="14.0" layoutY="162.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Events">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="start_work" />
+                        <MenuItem mnemonicParsing="false" text="normal_work" />
+                        <MenuItem mnemonicParsing="false" text="warning_work" />
+                        <MenuItem mnemonicParsing="false" text="error_work" />
+                        <MenuItem mnemonicParsing="false" text="end_work" />
+                    </items>
+                </MenuButton>
+                <TableView fx:id="tableView" layoutX="394.0" layoutY="13.0" prefHeight="257.0" prefWidth="297.0">
+                    <columns>
+                        <TableColumn fx:id="messageColumn" prefWidth="215.33328247070312" text="C1" />
+                        <TableColumn minWidth="7.3333740234375" prefWidth="72.66668701171875" text="C2" />
+                    </columns>
+                </TableView>
+                <CheckComboBox fx:id="checkComboBox" layoutX="126.0" layoutY="162.0" prefHeight="25.0" prefWidth="98.0" title="Events2" />
+                <CheckComboBox fx:id="checkComboBox1" layoutX="14.0" layoutY="201.0" prefHeight="29.0" prefWidth="128.0" title="Events3">
+                    <items>
+                            <String fx:value="start_work" />
+                            <String fx:value="normal_work" />
+                            <String fx:value="error_work" />
+                            <String fx:value="warning_work" />
+                            <String fx:value="end_work" />
+                    </items>
+                </CheckComboBox>
+                <Button fx:id="applySelectionButton" layoutX="14.0" layoutY="243.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Применить выбор" />
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>
-
-

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckComboBox?>
+
+<!--<?import jfxtras.scene.control.LocalDateTimePicker?>-->
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1344.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.programmjavafx.LatheController">
+    <children>
+        <Label layoutX="494.0" layoutY="28.0" text="Управление станком" textFill="WHITE">
+            <font>
+                <Font name="Arial" size="24.0" />
+            </font>
+        </Label>
+        <AnchorPane fx:id="AnchorPсane" layoutY="83.0" prefHeight="616.0" prefWidth="1344.0" style="-fx-background-color: #fafafa;">
+            <children>
+                <Button fx:id="startButton" layoutX="6.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="475.0" style="-fx-background-color: #00FA9A; -fx-background-radius: 20;" text="Log Запуск новой платы" />
+                <Button fx:id="normalWorkButton" layoutX="9.0" layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #00FA9A; -fx-background-radius: 20;" text="log Нормальная работа" />
+                <Button fx:id="warningButton" layoutX="169.0" layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #00FA9A; -fx-background-radius: 20;" text="Log Прупреждение" />
+                <Button fx:id="errorButton" layoutX="331.0" layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #00FA9A; -fx-background-radius: 20;" text="Log Ошибки" />
+                <Button fx:id="endButton" layoutX="6.0" layoutY="117.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="475.0" style="-fx-background-color: #00FA9A; -fx-background-radius: 20;" text="Конец операции обработки платы" />
+
+                <!-- Новые элементы интерфейса -->
+                <Button fx:id="selectImageButton" layoutX="487.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #9ACD32;" text="Выбрать изображение" />
+                <Button fx:id="decodeButton" layoutX="641.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #9ACD32;" text="Декодировать" />
+                <TableView fx:id="tableView" layoutY="370.0" prefHeight="249.0" prefWidth="1344.0" style="-fx-background-color: #DCDCDC;">
+                    <columns>
+                        <TableColumn fx:id="plateNumberColumn" minWidth="7.3333740234375" prefWidth="120.00000238418579" text="номер платы" />
+                        <TableColumn fx:id="messageColumn" prefWidth="250.66666412353516" text="вывод сообщений о работе станка" />
+                  <TableColumn fx:id="typeEventColumn" minWidth="7.3333740234375" prefWidth="120.00000238418579" text="тип события" />
+                  <TableColumn fx:id="timeEventColumn" minWidth="7.3333740234375" prefWidth="120.00000238418579" text="время события" />
+                    </columns>
+                </TableView>
+                <CheckComboBox fx:id="checkComboBox" layoutX="6.0" layoutY="175.0" prefHeight="40.0" prefWidth="204.0" style="-fx-background-color: #0077ff; -fx-background-radius: 10%;" title="Выбор режимов работ станка">
+                    <items>
+                            <String fx:value="start_work" />
+                            <String fx:value="normal_work" />
+                            <String fx:value="error_work" />
+                            <String fx:value="warning_work" />
+                            <String fx:value="end_work" />
+                    </items>
+                </CheckComboBox>
+                <Button fx:id="applySelectionButton" layoutX="217.0" layoutY="175.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="260.0" style="-fx-background-radius: 10;" text="Применить выбор режимов работы станка " />
+            <TextField fx:id="plateNumberInput" layoutX="746.0" layoutY="13.0" prefHeight="89.0" prefWidth="169.0" promptText="введите номер платы ..." />
+            <Button fx:id="getDataByPlateNumber" layoutX="487.0" layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #FFEBCD; -fx-background-radius: 20;" text="Получить сообщения по номеру платы" />
+            <Button fx:id="clearButton" layoutX="3.0" layoutY="227.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="475.0" style="-fx-background-color: #DB7093; -fx-background-radius: 10;" text="Очистить окно от сообщений" />
+            <TextField fx:id="timePeriodFromInput" layoutX="746.0" layoutY="117.0" prefHeight="40.0" prefWidth="169.0" promptText="введите дату от... в формате: yyyy-MM-dd HH:mm:ss " />
+            <Button fx:id="getMessageFromPeriod" layoutX="487.0" layoutY="117.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #FF00FF; -fx-background-radius: 10;" text="Временной период: ОТ.... получить сообщения" />
+            <Button fx:id="getMessageTillPeriod" layoutX="488.0" layoutY="176.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #D8BFD8; -fx-background-radius: 10;" text="Временной период: до ... получить сообщения" />
+            <TextField fx:id="timePeriodTillInput" layoutX="746.0" layoutY="176.0" prefHeight="40.0" prefWidth="169.0" promptText="введите дату до.. в.формате: yyyy-MM-dd HH:mm:ss " />
+            <Button fx:id="getMessageFromTillPeriod" layoutX="481.0" layoutY="227.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="435.0" style="-fx-background-color: #FFFACD; -fx-background-radius: 10;" text="Временной период: ОТ... и  ДО ... получить сообщения" />
+            <Button fx:id="applayAllFiltrs" layoutX="4.0" layoutY="280.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="917.0" style="-fx-background-color: #ADFF2F; -fx-background-radius: 20;" text="Применить все фильтры" />
+            <DatePicker fx:id="dataPicerField" layoutX="929.0" layoutY="40.0" prefHeight="25.0" prefWidth="342.0" promptText="выберите дату" /><Button fx:id="applayDataButton" layoutX="928.0" layoutY="160.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="342.0" style="-fx-background-color: linear-gradient(from 100% 0% to 0% 100%, #B0C4DE, #87CEFA); -fx-background-radius: 20;" text="Подтвердить выбор" textFill="#2e454d">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Button>
+            <Button fx:id="cancelDataButton" layoutX="929.0" layoutY="241.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="342.0" style="-fx-background-radius: 20; -fx-background-color: linear-gradient(from 100% 0% to 0% 100%, #A9A9A9, #D3D3D3);" text="Скрыть окно" />
+                <Spinner fx:id="hourSpinner" layoutX="923.0" layoutY="117.0" prefHeight="25.0" prefWidth="97.0" />
+                <Spinner fx:id="minuteSpinner" layoutX="1033.0" layoutY="117.0" prefHeight="25.0" prefWidth="97.0" />
+                <Spinner fx:id="secondSpinner" layoutX="1150.0" layoutY="117.0" prefHeight="25.0" prefWidth="97.0" />
+            <Label fx:id="textChooseTimeLable" alignment="CENTER" layoutX="921.0" layoutY="71.0" prefHeight="25.0" prefWidth="357.0" style="-fx-font-weight: 700;" text="Выбор времени для поиска:" textFill="#800000" underline="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="textChooseHourLable" layoutX="923.0" layoutY="95.0" text="выберите час:" textFill="DARKMAGENTA" />
+            <Label fx:id="textChooseMinuteLable" layoutX="1031.0" layoutY="95.0" text="выберите минуты:" textFill="DARKMAGENTA" />
+            <Label fx:id="textChooseSecondLable" layoutX="1146.0" layoutY="95.0" text="выберите секунды:" textFill="DARKMAGENTA" />
+            <Label fx:id="textChooseDataLable" alignment="CENTER" layoutX="923.0" layoutY="13.0" prefHeight="25.0" prefWidth="357.0" style="-fx-font-weight: 700;" text="Выбор даты для поиска:" textFill="MAROON" underline="true">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="cleanDataTimeButton" layoutX="928.0" layoutY="200.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="342.0" style="-fx-background-color: linear-gradient(from 100% 0% to 0% 100%, #FA8072, #FF0000); -fx-background-radius: 20;" text="Очистить время и дату " textFill="DARKSLATEGRAY">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="setCurrentTime" layoutX="931.0" layoutY="280.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="336.0" style="-fx-background-radius: 20; -fx-background-color: linear-gradient(from 100% 0% to 0% 100%, #000080, #00FFFF);" text="Установить текущее время" />
+            <Button fx:id="getMessageLastHour" layoutX="4.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="232.0" style="-fx-background-color: #ffa07a; -fx-background-radius: 20px;" text="Вывод за последний час " />
+            <Button fx:id="getMessageLastWeek" layoutX="514.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="232.0" style="-fx-background-color: #e9967a; -fx-background-radius: 20px;" text="Вывод за последнюю неделю" />
+            <Button fx:id="getMessageLastMonth" layoutX="769.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="232.0" style="-fx-background-color: #fa8072; -fx-background-radius: 20px;" text="Ввывод за последний месяц" />
+            <Button fx:id="getMessageLastYear" layoutX="1035.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="232.0" style="-fx-background-color: #f08080; -fx-background-radius: 20px;" text="Вывод за последний год" />
+            <Button fx:id="getMessageLastDay" layoutX="256.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="232.0" style="-fx-background-color: #fa8072; -fx-background-radius: 20px;" text="Вывод за последний день" />
+                <!--            <DatePicker layoutX="21.0" layoutY="326.0" />-->
+<!--                <LocalDateTimePicker fx:id="dateTimePicker" layoutX="200.0" layoutY="326.0" />-->
+
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

@@ -1,0 +1,15 @@
+Установлена плата серийный номер №: JJJ111 Время установки: 2024-07-17T09:46:47.837
+INFO: Normal operation log Время: 2024-07-17T09:47:20.556
+INFO: Normal operation log Время: 2024-07-17T09:47:20.783
+INFO: Normal operation log Время: 2024-07-17T09:47:21.031
+WARNING: Warning log Время сообщения об предупреждении: 2024-07-17T09:47:21.852
+INFO: Normal operation log Время: 2024-07-17T09:47:22.477
+INFO: Normal operation log Время: 2024-07-17T09:47:22.685
+INFO: Normal operation log Время: 2024-07-17T09:47:22.909
+ERROR: Error log Время сообщения об предупреждении: 2024-07-17T09:47:23.730
+INFO: Normal operation log Время: 2024-07-17T09:47:25.086
+INFO: Normal operation log Время: 2024-07-17T09:47:25.277
+INFO: Normal operation log Время: 2024-07-17T09:47:25.591
+WARNING: Warning log Время сообщения об предупреждении: 2024-07-17T09:47:26.331
+INFO: Normal operation log Время: 2024-07-17T09:47:26.814
+Операция по работе с платой завершена! Время завершения операции с платой: 

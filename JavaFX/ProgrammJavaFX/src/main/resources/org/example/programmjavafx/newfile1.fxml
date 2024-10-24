@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckComboBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="568.0" prefWidth="945.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.programmjavafx.LatheController">
+    <children>
+        <Label layoutX="156.0" layoutY="14.0" text="Управление станком" textFill="WHITE">
+            <font>
+                <Font name="Agency FB" size="24.0" />
+            </font>
+        </Label>
+        <AnchorPane fx:id="AnchorPсane" layoutX="4.0" layoutY="55.0" prefHeight="344.0" prefWidth="700.0" style="-fx-background-color: #fafafa;">
+            <children>
+                <Button fx:id="startButton" layoutX="174.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="435.0" text="запуск новой платы" />
+                <Button fx:id="normalWorkButton" layoutX="175.0" layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" text="log нормальная работа" />
+                <Button fx:id="warningButton" layoutX="321.0" layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" text="Log Прупреждение" />
+                <Button fx:id="errorButton" layoutX="467.0" layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" text="Log Ошибки" />
+                <Button fx:id="endButton" layoutX="175.0" layoutY="112.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="435.0" text="Конец операции обработки платы" />
+
+                <!-- Новые элементы интерфейса -->
+                <Button fx:id="selectImageButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Выбрать изображение" />
+                <Button fx:id="decodeButton" layoutX="14.0" layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Декодировать" />
+                <TextField fx:id="plateNumberField" layoutX="14.0" layoutY="112.0" prefHeight="40.0" prefWidth="150.0" promptText="Серийный номер платы" />
+                <TableView fx:id="tableView" layoutX="-3.0" layoutY="265.0" prefHeight="312.0" prefWidth="939.0">
+                    <columns>
+                        <TableColumn fx:id="plateNumberColumn" minWidth="7.3333740234375" prefWidth="120.00000238418579" text="номер платы" />
+                        <TableColumn fx:id="messageColumn" prefWidth="250.66666412353516" text="вывод сообщений о работе станка" />
+                    </columns>
+                </TableView>
+                <CheckComboBox fx:id="checkComboBox" layoutX="624.0" layoutY="13.0" prefHeight="40.0" prefWidth="312.0" title="Выбор режимов работ станка">
+                    <items>
+                            <String fx:value="start_work" />
+                            <String fx:value="normal_work" />
+                            <String fx:value="error_work" />
+                            <String fx:value="warning_work" />
+                            <String fx:value="end_work" />
+                    </items>
+                </CheckComboBox>
+                <Button fx:id="applySelectionButton" layoutX="625.0" layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="312.0" text="Применить выбор режимов работы станка " />
+            <TextField fx:id="plateNumberInput" layoutX="624.0" layoutY="112.0" prefHeight="40.0" prefWidth="312.0" promptText="введите номер платы ..." />
+            <Button fx:id="getDataByPlateNumber" layoutX="625.0" layoutY="162.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="312.0" text="получить сообщения по номеру платы" />
+            <Button fx:id="clearButton" layoutX="14.0" layoutY="168.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="190.0" text="очистить окно от сообщений" />
+            <TextField fx:id="timePeriodFromInput" layoutX="437.0" layoutY="175.0" prefHeight="25.0" prefWidth="175.0" promptText="задайте период от ...." />
+            <Button fx:id="getMessageFromPeriod" layoutX="212.0" layoutY="175.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="212.0" text="время от.... получить сообщения" />
+            <Button fx:id="getMessageTillPeriod" layoutX="212.0" layoutY="218.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="212.0" text="время до ... получить сообщения" />
+            <TextField fx:id="timePeriodTillInput" layoutX="437.0" layoutY="218.0" prefHeight="25.0" prefWidth="175.0" promptText="задайте период до..." />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

@@ -111,18 +111,21 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- библиотека для Spark -->
     <dependency>
       <groupId>com.sparkjava</groupId>
       <artifactId>spark-core</artifactId>
       <version>2.9.3</version>
     </dependency>
 
+    <!-- библиотека для протоколирования -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <version>1.7.25</version>
     </dependency>
 
+    <!-- библиотека для протоколирования -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -130,12 +133,13 @@
     </dependency>
 
 
-
+    <!-- библиотека для Thymeleaf -->
     <dependency>
       <groupId>org.thymeleaf</groupId>
       <artifactId>thymeleaf</artifactId>
       <version>3.0.11.RELEASE</version>
     </dependency>
+
     <!-- https://mvnrepository.com/artifact/com.sparkjava/spark-template-thymeleaf -->
     <dependency>
       <groupId>com.sparkjava</groupId>
@@ -143,11 +147,13 @@
       <version>2.7.1</version>
     </dependency>
 
+    <!-- библиотека для чтения Json формата -->
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.8.6</version>
     </dependency>
+
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -155,16 +161,75 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- библиотека для WebSocket - Server -->
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
       <artifactId>websocket-server</artifactId>
       <version>9.4.44.v20210927</version>
     </dependency>
 
+    <!-- библиотека для WebSocket - Client -->
     <dependency>
       <groupId>org.eclipse.jetty.websocket</groupId>
       <artifactId>websocket-client</artifactId>
       <version>9.4.44.v20210927</version>
+    </dependency>
+
+    <!-- библиотека для WebSocket API -->
+    <dependency>
+      <groupId>javax.websocket</groupId>
+      <artifactId>javax.websocket-api</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+    <!-- библиотека для чтения DataMatrix QR-code -->
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>core</artifactId>
+      <version>3.5.3</version>
+    </dependency>
+
+    <!-- библиотека для чтения DataMatrix QR-code -->
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>javase</artifactId>
+      <version>3.5.3</version>
+    </dependency>
+
+    <!-- работа с Базой Данных PostgreSQL -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.3.6</version>
+    </dependency>
+
+    <!-- работа с кнопками CheckComboBox в JavaFX -->
+    <dependency>
+      <groupId>org.controlsfx</groupId>
+      <artifactId>controlsfx</artifactId>
+      <version>11.2.1</version>
+    </dependency>
+
+    <!-- JFXtras Controls -->
+    <dependency>
+      <groupId>org.jfxtras</groupId>
+      <artifactId>jfxtras-controls</artifactId>
+      <version>17-r1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.jfxtras/jfxtras-labs -->
+    <dependency>
+      <groupId>org.jfxtras</groupId>
+      <artifactId>jfxtras-labs</artifactId>
+      <version>8.0-r6</version>
+    </dependency>
+
+
+    <!-- JFoenix (если вы используете компоненты из этой библиотеки) -->
+    <dependency>
+      <groupId>com.jfoenix</groupId>
+      <artifactId>jfoenix</artifactId>
+      <version>9.0.10</version>
     </dependency>
 
   </dependencies>

@@ -1,39 +1,31 @@
 package org.example.programmjavafx.Server;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.*;
 import org.example.programmjavafx.Server.interfaces.InterfaceMethods;
+import org.example.programmjavafx.Server.jsonService.TransformationToJsonFormat;
 import org.example.programmjavafx.Server.maps.MethodRegistry;
 import org.example.programmjavafx.Server.reflectionMethods.InvokeMethods;
-import java.io.File;
+import org.example.programmjavafx.Server.someErrors.SomeErrors;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+/** класс обработчик сообщений от клиента **/
 @WebSocket
 public class MyWebSocketHandler
 {
-    //private static final String LOG_DIRECTORY = "C:\\Expert Group\\LoggerLathe\\logfiles";
-
-      private static final String LOG_DIRECTORY = "C:\\Expert Group\\JavaFX\\ProgrammJavaFX";
-
+    //region Fields
     private static final Map<Session, String> sessions = new ConcurrentHashMap<>();
-
     private final InvokeMethods invokeMethods = new InvokeMethods();
+    private static String messageFromClient;
+    //endregion
 
-
-    private static String plateNumber;
-
-    Gson gson = new Gson();
-
+    /**
+     * метод отвечает за соединение с клиентом
+     **/
     @OnWebSocketConnect
     public void onConnect(Session session)
     {
@@ -46,85 +38,74 @@ public class MyWebSocketHandler
         System.out.println("Присоединён новый WebsocketClient, URL: " + session.getRemoteAddress().getAddress());
     }
 
-
+    /**
+     * метод отвечает за обработку сообщений от клиента
+     *  В зависимости от полученного сообщения от клиента
+     *  определяет, какой метод нужно вызвать,
+     *  и использует invokeMethod для выполнения этого вызова
+     **/
     @OnWebSocketMessage
     public void onMessage(Session session, String message) throws IOException
     {
+        messageFromClient = message;
         System.out.println("От клиента c URL: " + sessions.get(session) + "получено сообщение: " + message);
 
         RequestMessage requestMessage;
 
         try
         {
-                // использование класса RequestMessage для обработки входящих сообщений:
-                requestMessage = gson.fromJson(message, RequestMessage.class);
-                System.out.println("Parsed request message: method="
-                                    + requestMessage.getMethod()
-                                    + ", entity="
-                                    + requestMessage.getEntity()
-                                    + ", data="
-                                    + requestMessage.getData());
+            // преобразование входящего сообщения json формата в Java объект, конкретно в объект класса RequestMessage:
+            requestMessage = TransformationToJsonFormat.transformationToJsonFormat(message);
         }
-        catch (JsonSyntaxException e)
+        catch (JsonSyntaxException e) // обработка недопустимого формата Json
         {
-            System.err.println("Не удалось разобрать сообщение: " + message);
-            JsonObject errorResponse = new JsonObject();
-            errorResponse.addProperty("status", "error");
-            errorResponse.addProperty("message", "Недопустимый формат JSON");
-            session.getRemote().sendString(sessions.get(session) + errorResponse.toString());
+            SomeErrors.JsonForbiddenFormatError(session, message, sessions);
             return;
         }
 
-        /** зполучаем из Класса RequestMessage данные **/
+        /** получаем из Класса RequestMessage данные **/
         String method = requestMessage.getMethod();
         String entity = requestMessage.getEntity();
         String data = requestMessage.getData();
 
         JsonObject response = new JsonObject();
 
-        if(method == null)
-        {
-            response.addProperty("status", "error");
-            response.addProperty("ошибка", "в сообщении клиента отсутствует метод!");
-            session.getRemote().sendString(response.toString());
+        if (method == null) // если method отсутствует в сообщение от клмента
+        {   // обработка ошибки: отсутствие method в сообщении от клиента
+            SomeErrors.errorAbsenceMethodInClientMessage(response, session);
         }
-        if(entity == null)
-        {
-            response.addProperty("status", "error");
-            response.addProperty("ошибка", "в сообщении клиента отсутствует сущьность entity!");
-            session.getRemote().sendString(response.toString());
+        if (entity == null) // если entity отсутствует в сообщение от клмента
+        {   // обработка ошибки: отсутствие entity в сообщении от клиента
+            SomeErrors.errorAbsenceEntityInClientMessage(response, session);
         }
-
-        if (data != null)
-        {
-            setPlateNumber(data);
-            System.out.println("Установлен номер платы: " + plateNumber);
-        } else {
-            response.addProperty("статус ", "ощибка");
-            response.addProperty("ответ ", "в сообщении от клиента, либо отстутствуют данные, либо Неизвестные данные (номер платы): " + entity);
-            session.getRemote().sendString(sessions.get(session) + response.toString());
+        if (data == null) // если data отсутствует в сообщение от клмента
+        {   //  обработка ошибки: отсутствие data в сообщении от клиента
+            SomeErrors.errorAbsenceDataInClientMessage(response, session, sessions, entity);
         }
 
         try
         {
             String key = entity.toLowerCase();
-            InterfaceMethods handler = MethodRegistry.getMap(key);
+            InterfaceMethods foundEntity = MethodRegistry.getMap(key); // получаем класс (сущьность), который будет предоставлять метод для обработки
 
-            if (handler != null)
+            if (foundEntity != null)
             {
-                InterfaceMethods.Args args = new InterfaceMethods.Args(session, data);
-                invokeMethods.invokeMethod(handler, method, args, response);
+                InterfaceMethods.Args args = new InterfaceMethods.Args(session, data); // создаём клас с необходимыми аргументами session и data
+
+                args.setPlateNumber(data); // устанавливаем номер платы станка равной data
+
+                invokeMethods.invokeMethod(foundEntity, method, args, response); // вызов нужного метода с использованием рефлексии
             }
         }
-        catch (Exception e)
+        catch (Exception e) // обработка внутренней ошибки сервера
         {
-            System.err.println("Запрос на обработку ошибки: " + e.getMessage());
-            response.addProperty("статус ", "ошибка");
-            response.addProperty("ответ ", "Внутренняя ошибка сервера.");
-            session.getRemote().sendString(sessions.get(session) + response.toString());
+            SomeErrors.innerErrorFromServer(session, response, sessions, e);
         }
     }
 
+    /**
+     * метод отвечает за закрытие соединений
+     **/
     @OnWebSocketClose
     public void onClose(Session session, int statusCode, String reason)
     {
@@ -132,115 +113,30 @@ public class MyWebSocketHandler
         System.out.println("разорвано соединение с (WebSocket Client) клиентом: " + session.getRemoteAddress().getAddress());
     }
 
+    /**
+     * метод отвечает за ошибки с сообщениями
+     **/
     @OnWebSocketError
     public void onError(Session session, Throwable throwable)
     {
         System.err.println("Ошибка соединения с (WebSocket Client) Клиентом: " + throwable.getMessage());
     }
 
-
-    public void setPlateNumber(String data)
-    {
-        this.plateNumber = data;
-        System.out.println("в методе setPlateNumber(String data) установили plateNumber " + plateNumber);
-    }
-
-    public String getPlateNumber()
-    {
-        return plateNumber;
-    }
-
-    public static void findLogByBoardNumber(Session session, String boardNumber) throws IOException
-    {
-        //Path logDirPath = Paths.get("C:/Expert Group/LoggerLathe/logfiles"); // Путь к каталогу логов
-
-          Path logDirPath = Paths.get("C:/Expert Group/JavaFX/ProgrammJavaFX");
-
-        String fileNamePattern = "*_" + boardNumber + ".txt"; // Шаблон имени файла
-
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(logDirPath, fileNamePattern))
-        {
-            boolean fileFound = false; // устанавливаем флаг false
-            for (Path entry : stream) // итерируемся по потоку путей
-            {
-                String fileContent = Files.readString(entry, StandardCharsets.UTF_8); // Чтение содержимого файла
-                System.out.println("контент файла: " + fileContent);
-                session.getRemote().sendString(fileContent); // Отправка содержимого файла клиенту
-                fileFound = true; // файл с номером нужной платы найден, устанавливаем флаг tru
-                break; //  выход из цикла
-            }
-
-            if (!fileFound) // если файл с такой платой не найден
-            {
-                System.out.println("файл не найден с такой платой: " + boardNumber);
-                session.getRemote().sendString("Ошибка: Файл с таким номером платы: " + boardNumber + " - не найден!"); // Сообщение об ошибке, если файл не найден
-            }
-        }
-        catch (IOException e) // в случае ошибки обрабатываем исключение
-        {
-            session.getRemote().sendString("Ошибка чтения содержимого из файлов: " + e.getMessage()); // посылаем клиенту сообщение об ошибке
-            e.printStackTrace(); // печатает стек ошибок
-        }
-
-    }
-
-    public static void getFile(Session session, String data) throws IOException
-    {
-
-        //Path logDirPath = Paths.get("C:/Expert Group/LoggerLathe/logfiles"); // Путь к каталогу логов
-
-          Path logDirPath = Paths.get("C:/Expert Group/JavaFX/ProgrammJavaFX");
-
-        String fileNamePattern = "*_" + data + ".txt"; // Шаблон имени файла
-
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(logDirPath, fileNamePattern)) {
-            boolean fileFound = false; // устанавливаем флаг false
-            for (Path entry : stream) // итерируемся по потоку путей
-            {
-                JsonObject response = new JsonObject();
-                response.addProperty("status", "success");
-                response.addProperty("fileName", entry.getFileName().toString());
-                session.getRemote().sendString(response.toString());
-
-            }
-
-            if (!fileFound) // если файл с такой платой не найден
-            {
-                session.getRemote().sendString("Ошибка: файл с таким номером платы: " + data + " - не найден!"); // Сообщение об ошибке, если файл не найден
-            }
-        } catch (IOException e) // в случае ошибки обрабатываем исключение
-        {
-            session.getRemote().sendString("Ошибка чтения содержимого из файлов: " + e.getMessage()); // посылаем клиенту сообщение об ошибке
-            e.printStackTrace(); // печатает стек ошибок
-        }
-    }
-
-    private String getLogFileContent(String boardNumber) throws IOException
-    {
-        File directory = new File(LOG_DIRECTORY);
-        File[] files = directory.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isFile() && file.getName().startsWith("pcblog_") && file.getName().endsWith(".txt") && file.getName().contains(boardNumber)) {
-                    return Files.readString(file.toPath());
-                }
-            }
-        }
-        return null;
-    }
-
-    /** метод обходит все сессии и отправляет сообщения всем подключённым клиентам **/
+    /**
+     * метод обходит все сессии и отправляет сообщения всем подключённым клиентам
+     **/
     public static void broadcastMessage(String message)
     {
+        // итерация по сессиям
         for (Map.Entry<Session, String> currentSession : sessions.entrySet())
         {
-            Session session = currentSession.getKey();
-            String userName = currentSession.getValue();
-            if (session.isOpen())
+            Session session = currentSession.getKey(); // получаем сессию
+            String userName = currentSession.getValue(); // получаем имя пользователя
+            if (session.isOpen()) // если сессия открыта, то:
             {
                 try
                 {
-                    session.getRemote().sendString(userName + ": " + message);
+                    session.getRemote().sendString(userName + ": " + message); // посылаем сообщение пользователю
                     System.out.println(userName + ": " + message); // Логирование сообщения с именем пользователя
                 }
                 catch (IOException e)
@@ -251,41 +147,40 @@ public class MyWebSocketHandler
         }
     }
 
+    /**
+     * метод для получения номера платы из сообщения клиента
+     **/
+    public static String getPlateNumberFromWebSocketClientMessage(String message)
+    {
+        try
+        {
+            RequestMessage requestMessage = TransformationToJsonFormat.transformationToJsonFormat(message);
+            return requestMessage.getData(); // предполагается, что номер платы содержится в поле data
+        }
+        catch (JsonSyntaxException e)
+        {
+            System.err.println("Ошибка преобразования сообщения в формат JSON: " + e.getMessage());
+            return null;
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    public static void broadcastMessage(String message)
-//    {
-//        for (Session session : sessions.keySet())
-//        {
-//            if (session.isOpen())
-//            {
-//                try
-//                {
-//                    session.getRemote().sendString(message);
-//                }
-//                catch (IOException e)
-//                {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//    }
+    /** метод получения номера платы из сообщения **/
+    public static String getClientMessage()
+    {
+        return getPlateNumberFromWebSocketClientMessage(messageFromClient);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 

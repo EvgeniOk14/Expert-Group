@@ -1,0 +1,281 @@
+/** описание кнопки startButton **/
+ #startButton {
+     -fx-background-color: #00FA9A;
+     -fx-background-radius: 20px;
+}
+ #startButton:hover {
+    -fx-background-color:  #00FF00;
+}
+ #startButton:pressed {
+    -fx-background-color:  #008000;
+}
+
+/** описание кнопки endButton **/
+ #endButton {
+     -fx-background-color: #00FA9A;
+     -fx-background-radius: 20px;
+  }
+  #endButton:hover {
+      -fx-background-color:  #00FF00;
+  }
+  #endButton:pressed {
+      -fx-background-color:  #008000;
+  }
+
+/** описание кнопки normalWorkButton **/
+  #normalWorkButton{
+      -fx-background-color: #00FA9A;
+      -fx-background-radius: 20px;
+  }
+   #normalWorkButton:hover {
+      -fx-background-color:  #00FF00;
+  }
+  #normalWorkButton:pressed {
+      -fx-background-color:  #008000;
+  }
+
+/** описание кнопки normalWorkButton **/
+ #warningButton {
+     -fx-background-color: #00FA9A;
+     -fx-background-radius: 20px;
+ }
+#warningButton:hover {
+    -fx-background-color:  #00FF00;
+}
+#warningButton:pressed {
+    -fx-background-color:  #008000;
+}
+
+/** описание кнопки errorButton **/
+#errorButton {
+    -fx-background-color: #00FA9A;
+    -fx-background-radius: 20px;
+}
+#errorButton:hover {
+    -fx-background-color:  #00FF00;
+}
+#errorButton:pressed {
+    -fx-background-color:  #008000;
+}
+
+/** описание кнопки checkComboBox **/
+#checkComboBox.choice-box {
+    -fx-background-color: #0077ff;
+    -fx-background-radius: 20px;
+}
+
+/** описание кнопки applySelectionButton **/
+#applySelectionButton {
+    -fx-background-color: #DCDCDC;
+    -fx-background-radius: 10px;
+}
+#applySelectionButton:hover {
+    -fx-background-color: #A9A9A9;
+}
+#applySelectionButton:pressed {
+    -fx-background-color: #696969;
+}
+
+/** описание кнопки clearButton **/
+#clearButton {
+    -fx-background-color: #DB7093;
+    -fx-background-radius: 10px;
+}
+#clearButton:hover {
+    -fx-background-color: #f08080;
+}
+#clearButton:pressed {
+    -fx-background-color: #ffa07a;
+}
+
+/** описание кнопки selectImageButton **/
+#selectImageButton {
+    -fx-background-color: #9ACD32;
+    -fx-background-radius: 10px;
+}
+#selectImageButton:hover {
+    -fx-background-color: #00FF00;
+}
+#selectImageButton:pressed {
+    -fx-background-color: #ADFF2F;
+}
+
+/** описание кнопки decodeButton **/
+#decodeButton {
+    -fx-background-color: #9ACD32;
+    -fx-background-radius: 10px;
+}
+#decodeButton:hover {
+    -fx-background-color: #00FF00;
+}
+#decodeButton:pressed {
+    -fx-background-color: #ADFF2F;
+}
+
+/** описание кнопки getDataByPlateNumber **/
+#getDataByPlateNumber {
+    -fx-background-color: #FFEBCD;
+    -fx-background-radius: 10px;
+}
+#getDataByPlateNumber:hover {
+    -fx-background-color: #DEB887;
+}
+#getDataByPlateNumber:pressed {
+    -fx-background-color: #FFF8DC;
+}
+
+/** описание кнопки getMessageFromPeriod **/
+#getMessageFromPeriod {
+    -fx-background-color: #FF00FF;
+    -fx-background-radius: 10px;
+}
+#getMessageFromPeriod:hover {
+    -fx-background-color: #DEB887;
+}
+#getMessageFromPeriod:pressed {
+    -fx-background-color: #FFF8DC;
+}
+
+/** описание кнопки getMessageTillPeriod **/
+#getMessageTillPeriod {
+    -fx-background-color:  #D8BFD8;
+    -fx-background-radius: 10px;
+}
+#getMessageTillPeriod:hover {
+    -fx-background-color: #BA55D3;
+}
+#getMessageTillPeriod:pressed {
+    -fx-background-color: #DDA0DD;
+}
+
+/** описание кнопки getMessageFromTillPeriod **/
+#getMessageFromTillPeriod {
+    -fx-background-color: #FFFACD;
+    -fx-background-radius: 10px;
+}
+#getMessageFromTillPeriod:hover {
+    -fx-background-color: #EEE8AA;
+}
+#getMessageFromTillPeriod:pressed {
+    -fx-background-color: #FAFAD2;
+}
+
+/** описание кнопки applayAllFiltrs **/
+#applayAllFiltrs {
+    -fx-background-color:  #ADFF2F;
+    -fx-background-radius: 20px;
+}
+#applayAllFiltrs:hover {
+    -fx-background-color: #EEE8AA;
+}
+#applayAllFiltrs:pressed {
+    -fx-background-color: #FAFAD2;
+}
+
+/** описание кнопки getMessageLastHour **/
+#getMessageLastHour {
+    -fx-background-color:  #ffa07a;
+    -fx-background-radius: 20px;
+}
+#getMessageLastHour:hover {
+    -fx-background-color: #e9967a;
+}
+#getMessageLastHour:pressed {
+    -fx-background-color: #dc143c;
+}
+
+/** описание кнопки getMessageLastDay **/
+#getMessageLastDay {
+    -fx-background-color: #ffa07a;
+    -fx-background-radius: 20px;
+}
+#getMessageLastDay:hover {
+    -fx-background-color: #e9967a;
+}
+#getMessageLastDay:pressed {
+    -fx-background-color: #dc143c;
+}
+
+/** описание кнопки getMessageLastWeek **/
+#getMessageLastWeek {
+    -fx-background-color: #ffa07a;
+    -fx-background-radius: 20px;
+}
+#getMessageLastWeek:hover {
+    -fx-background-color: #e9967a;
+}
+#getMessageLastWeek:pressed {
+    -fx-background-color: #dc143c;
+}
+
+/** описание кнопки getMessageLastMonth **/
+#getMessageLastMonth {
+    -fx-background-color:  #ffa07a;
+    -fx-background-radius: 20px;
+}
+#getMessageLastMonth:hover {
+    -fx-background-color: #e9967a;
+}
+#getMessageLastMonth:pressed {
+    -fx-background-color: #dc143c;
+}
+
+/** описание кнопки getMessageLastYear **/
+#getMessageLastYear {
+    -fx-background-color: #ffa07a;
+    -fx-background-radius: 20px;
+}
+#getMessageLastYear:hover {
+    -fx-background-color: #e9967a;
+}
+#getMessageLastYear:pressed {
+    -fx-background-color: #dc143c;
+}
+
+/** описание кнопки applayDataButton **/
+#applayDataButton {
+    -fx-background-color: #7FFFD4;
+    -fx-background-radius: 20px;
+}
+#applayDataButton:hover {
+    -fx-background-color: #20B2AA;
+}
+#applayDataButton:pressed {
+    -fx-background-color: #00CED1;
+}
+
+/** описание кнопки cleanDataTimeButton **/
+#cleanDataTimeButton {
+    -fx-background-color:  #FF1493;
+    -fx-background-radius: 20px;
+}
+#cleanDataTimeButton:hover {
+    -fx-background-color: #FF4500;
+}
+#cleanDataTimeButton:pressed {
+    -fx-background-color: #800000;
+}
+
+/** описание кнопки cancelDataButton **/
+#cancelDataButton {
+    -fx-background-color: #A9A9A9;
+    -fx-background-radius: 20px;
+}
+#cancelDataButton:hover {
+    -fx-background-color: #DCDCDC;
+}
+#cancelDataButton:pressed {
+    -fx-background-color: #696969;
+}
+
+/** описание кнопки setCurrentTime **/
+#setCurrentTime {
+    -fx-background-color: #87CEFA;
+    -fx-background-radius: 20px;
+}
+#setCurrentTime:hover {
+    -fx-background-color: #1E90FF;
+}
+#setCurrentTime:pressed {
+    -fx-background-color: #4682B4;
+}

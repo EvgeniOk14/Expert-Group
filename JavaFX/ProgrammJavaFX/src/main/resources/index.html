@@ -7,11 +7,11 @@
 </head>
 <body>
 <header>Вывод всех ссылок на логи:</header>
-<ul>
-    <li th:each="logFile : ${logFiles}">
-        <a th:href="'/log/' + ${logFile}" th:text="${logFile}"></a>
-    </li>
-</ul>
+    <ul>
+        <li th:each="logFile : ${logFiles}">
+            <a th:href="'/log/' + ${logFile}" th:text="${logFile}"></a>
+        </li>
+    </ul>
 </body>
 </html>
 

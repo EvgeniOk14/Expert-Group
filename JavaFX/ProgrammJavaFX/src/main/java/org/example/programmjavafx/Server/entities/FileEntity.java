@@ -1,45 +1,79 @@
 package org.example.programmjavafx.Server.entities;
 
 import com.google.gson.JsonObject;
-import org.example.programmjavafx.Server.MyWebSocketHandler;
+import org.example.programmjavafx.Server.definitionOfPath.GetPlatformSpecificPath;
 import org.example.programmjavafx.Server.interfaces.InterfaceMethods;
-import java.io.IOException;
+import org.example.programmjavafx.Server.service.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+
+/** Класс описывает сущность FileEntity и переопределяет её методы **/
 public class FileEntity implements InterfaceMethods
 {
-    private JsonObject response = new JsonObject();
 
     @Override
     public void get(Args args) throws IOException
     {
-        System.out.println("В FileEntity сработал метод get!");
+        try {
+            System.out.println("В FileEntity сработал метод get!");
 
-        MyWebSocketHandler.getFile(args.session, args.data);
-
-        response.addProperty("ответ", "В FileEntity сработал метод get!");
-
-        sendMessageFromFileEntity(args, response);
+            if (args.data.equalsIgnoreCase("array.json"))
+            {
+                JsonObject response = new JsonObject();
+                response.addProperty("ответ","метод get");
+                args.session.getRemote().sendString(response.toString());
+                Service.getJsonFile(args.session, args.data); // получение файла по заданному пути
+            }
+            else
+            {
+                Service.getLogFile(args.session, args.data, args.logFileDirectory);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void update(Args args) throws IOException
     {
-        System.out.println("В FileEntity сработал метод update!");
+        JsonObject response = new JsonObject();
+        try
+        {
+            response.addProperty("Ответ", "метод update");
+            args.session.getRemote().sendString(response.toString());
 
-        MyWebSocketHandler.getFile(args.session, args.data);
+            Path filePath = GetPlatformSpecificPath.getPlatformSpecificPath(args.jsonFileDirectory, args.data);
 
-        response.addProperty("ответ", "В FileEntity сработал метод Update!");
+            String content = Service.getFileContentByWebSocketClientMessage(filePath.toString());
 
-        sendMessageFromFileEntity(args, response);
+
+            System.out.println("Содержимое файла array.json: " + content); // вывод в консоль содержимого файла
+
+            response.addProperty("content", content); // ответ клиенту
+
+            args.session.getRemote().sendString(content); // отправка ответа клиенту
+        }
+        catch (Exception e)
+        {
+            response.addProperty("error", e.getMessage());
+            System.err.println("Ошибка при чтении файла: " + e.getMessage());
+        }
     }
 
     @Override
     public void save(Args args) throws IOException
     {
+
+
         System.out.println("В FileEntity сработал метод save!");
 
-        MyWebSocketHandler.getFile(args.session, args.data);
+        Service.getLogFile(args.session, args.data, args.logFileDirectory);
 
+        JsonObject response = new JsonObject();
         response.addProperty("ответ", "В FileEntity сработал метод save!");
 
         sendMessageFromFileEntity(args, response);
@@ -48,10 +82,13 @@ public class FileEntity implements InterfaceMethods
     @Override
     public void delete(Args args) throws IOException
     {
+
+
         System.out.println("В FileEntity сработал метод delete!");
 
-        MyWebSocketHandler.getFile(args.session, args.data);
+        Service.getLogFile(args.session, args.data, args.logFileDirectory);
 
+        JsonObject response = new JsonObject();
         response.addProperty("ответ", "В FileEntity сработал метод delete!");
 
         sendMessageFromFileEntity(args, response);
@@ -62,8 +99,9 @@ public class FileEntity implements InterfaceMethods
     {
         System.out.println("В FileEntity сработал метод create!");
 
-        MyWebSocketHandler.getFile(args.session, args.data);
+        Service.getLogFile(args.session, args.data, args.logFileDirectory);
 
+        JsonObject response = new JsonObject();
         response.addProperty("ответ", "В FileEntity сработал метод create!");
 
         sendMessageFromFileEntity(args, response);

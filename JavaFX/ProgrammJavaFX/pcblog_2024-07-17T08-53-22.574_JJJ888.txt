@@ -1,0 +1,13 @@
+Установлена плата серийный номер №: JJJ888 Время установки: 2024-07-17T08:53:22.573
+INFO: Normal operation log Время: 2024-07-17T08:53:50.191
+INFO: Normal operation log Время: 2024-07-17T08:53:50.455
+INFO: Normal operation log Время: 2024-07-17T08:53:50.736
+WARNING: Warning log Время сообщения об предупреждении: 2024-07-17T08:53:52.328
+INFO: Normal operation log Время: 2024-07-17T08:53:53.257
+INFO: Normal operation log Время: 2024-07-17T08:53:53.505
+INFO: Normal operation log Время: 2024-07-17T08:53:53.764
+ERROR: Error log Время сообщения об предупреждении: 2024-07-17T08:53:54.568
+INFO: Normal operation log Время: 2024-07-17T08:53:55.541
+INFO: Normal operation log Время: 2024-07-17T08:53:55.805
+INFO: Normal operation log Время: 2024-07-17T08:53:56.012
+Операция по работе с платой завершена! Время завершения операции с платой: 

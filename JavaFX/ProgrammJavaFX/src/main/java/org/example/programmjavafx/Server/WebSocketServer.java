@@ -11,9 +11,10 @@ public class WebSocketServer
 {
     private Server server; // Jetty - легковесный HTTP-сервер обрабатывать входящие HTTP и WebSocket соединения
 
+    // метод запуска сервера
     public void start() throws Exception
     {
-        server = new Server(8095);
+        server = new Server(8095); // запускаем сервер на порту 8095
 
         // WebSocketHandler обработчик, который управляет WebSocket-соединениями
         // используется анонимный класс, который наследует WebSocketHandler
@@ -28,11 +29,12 @@ public class WebSocketServer
                 factory.register(MyWebSocketHandler.class);
             }
         };
-        server.setHandler(wsHandler);
-        server.start();
+        server.setHandler(wsHandler); // устанавливаем wsHandler в качестве обработчика сообщений
+        server.start(); // запускаем сервер
         System.out.println("Сервер для общения с клиентами стартовал на порту: 8095");
     }
 
+    // метод остановки сервера
     public void stop() throws Exception
     {
         if (server != null)
